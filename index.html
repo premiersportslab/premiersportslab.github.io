@@ -1,528 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Premier Sports Lab | Lake Nona Basketball</title>
-  <meta
-    name="description"
-    content="Premier Sports Lab offers youth basketball leagues, Mini Hoops, skills training through The Lab, and adult pickup basketball in Lake Nona, Orlando."
-  />
-
-  <style>
-    :root {
-      --psl-orange: #f47a1f;
-      --psl-green: #79c143;
-      --psl-green-deep: #4f8f2e;
-      --psl-black: #090909;
-      --psl-charcoal: #141414;
-      --psl-white: #ffffff;
-      --psl-muted: #b8b8b8;
-      --psl-line: rgba(255,255,255,.13);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      color: var(--psl-white);
-      background:
-        radial-gradient(circle at 78% 22%, rgba(244,122,31,.17), transparent 27rem),
-        radial-gradient(circle at 13% 78%, rgba(121,193,67,.15), transparent 26rem),
-        radial-gradient(circle at 58% 100%, rgba(121,193,67,.07), transparent 30rem),
-        var(--psl-black);
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .22;
-      background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, black, transparent 92%);
-    }
-
-    .page {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--psl-line);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      text-decoration: none;
-      color: white;
-    }
-
-    .brand-logo {
-      display: block;
-      width: auto;
-      height: 66px;
-      max-width: 190px;
-      object-fit: contain;
-      filter: drop-shadow(0 6px 14px rgba(0,0,0,.28));
-    }
-
-    .brand-copy strong {
-      display: block;
-      font-size: 14px;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .brand-copy small {
-      color: var(--psl-muted);
-      font-size: 12px;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border: 1px solid var(--psl-line);
-      border-radius: 999px;
-      color: #dedede;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,.03);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--psl-green);
-      box-shadow: 0 0 0 5px rgba(121,193,67,.12);
-    }
-
-    main {
-      flex: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(310px, .8fr);
-      gap: clamp(50px, 8vw, 110px);
-      align-items: center;
-      padding: 80px 0;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 22px;
-      color: var(--psl-green);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: var(--psl-green);
-    }
-
-    h1 {
-      max-width: 820px;
-      font-size: clamp(3.5rem, 7.5vw, 7.7rem);
-      line-height: .88;
-      letter-spacing: -.065em;
-      text-transform: uppercase;
-    }
-
-    h1 .accent {
-      color: var(--psl-orange);
-    }
-
-    h1 .accent-green {
-      color: var(--psl-green);
-    }
-
-    .lead {
-      max-width: 690px;
-      margin-top: 28px;
-      color: #cdcdcd;
-      font-size: clamp(1rem, 1.5vw, 1.2rem);
-      line-height: 1.7;
-    }
-
-    .lead strong {
-      color: white;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 34px;
-    }
-
-    .btn {
-      min-height: 50px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 0 19px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 850;
-      font-size: 14px;
-      transition: transform .18s ease, opacity .18s ease, background .18s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      color: #071006;
-      background: var(--psl-green);
-      box-shadow: 0 12px 30px rgba(121,193,67,.14);
-    }
-
-    .btn-primary:hover {
-      background: #8bd153;
-    }
-
-    .btn-secondary {
-      color: white;
-      background: rgba(244,122,31,.06);
-      border: 1px solid rgba(244,122,31,.52);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(244,122,31,.12);
-    }
-
-    .panel {
-      position: relative;
-      padding: 28px;
-      border: 1px solid var(--psl-line);
-      border-radius: 18px;
-      background: linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
-      box-shadow: 0 24px 70px rgba(0,0,0,.28);
-      backdrop-filter: blur(12px);
-      overflow: hidden;
-    }
-
-    .panel::before {
-      content: "";
-      position: absolute;
-      top: -80px;
-      right: -80px;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      border: 2px solid rgba(121,193,67,.58);
-      box-shadow:
-        inset 0 0 0 26px rgba(121,193,67,.035),
-        inset 0 0 0 54px rgba(244,122,31,.025);
-    }
-
-    .panel-label {
-      position: relative;
-      z-index: 1;
-      margin-bottom: 20px;
-      color: var(--psl-muted);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .programs {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 11px;
-    }
-
-    .program {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--psl-line);
-    }
-
-    .program:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .program:first-child {
-      padding-top: 0;
-    }
-
-    .program-name {
-      font-weight: 820;
-      letter-spacing: -.015em;
-    }
-
-    .program-tag {
-      color: var(--psl-green);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .program:nth-child(even) .program-tag {
-      color: var(--psl-orange);
-    }
-
-    .program:nth-child(3) .program-name {
-      color: #f4f4f4;
-    }
-
-    .contact-strip {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 26px;
-    }
-
-    .contact-card {
-      padding: 14px;
-      border-radius: 10px;
-      background: rgba(0,0,0,.24);
-      border: 1px solid rgba(121,193,67,.18);
-    }
-
-    .contact-card span {
-      display: block;
-      margin-bottom: 4px;
-      color: #909090;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .contact-card a,
-    .contact-card p {
-      color: white;
-      text-decoration: none;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    footer::before {
-      content: "";
-      position: absolute;
-      top: -1px;
-      left: 0;
-      width: 150px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--psl-green) 0 55%, var(--psl-orange) 55% 100%);
-    }
-
-    footer {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 22px 0 28px;
-      border-top: 1px solid var(--psl-line);
-      color: #858585;
-      font-size: 12px;
-    }
-
-    footer a {
-      color: #bdbdbd;
-      text-decoration: none;
-    }
-
-    @media (max-width: 860px) {
-      main {
-        grid-template-columns: 1fr;
-        padding: 64px 0;
-      }
-
-      h1 {
-        font-size: clamp(3.4rem, 15vw, 6.3rem);
-      }
-
-      .panel {
-        max-width: 620px;
-      }
-    }
-
-    @media (max-width: 580px) {
-      .page {
-        width: min(100% - 28px, 1180px);
-      }
-
-      header {
-        padding: 20px 0;
-      }
-
-      .brand-logo {
-        height: 52px;
-        max-width: 150px;
-      }
-
-      .brand-copy small,
-      .status span:last-child {
-        display: none;
-      }
-
-      main {
-        padding: 52px 0;
-      }
-
-      .lead {
-        margin-top: 22px;
-      }
-
-      .actions {
-        display: grid;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .contact-strip {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="page">
-    <header>
-      <a class="brand" href="/" aria-label="Premier Sports Lab home">
-        <img
-          class="brand-logo"
-          src="assets/images/image-1.png"
-          alt="Premier Sports Lab"
-        />
-      </a>
-
-      <div class="status">
-        <span class="status-dot"></span>
-        <span>Site Upgrade In Progress</span>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Home | Premier Sports Lab</title>
+    <meta
+      name="description"
+      content="Structured youth basketball in Lake Nona for ages 3–14. Fundamentals, character, and community."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="theme-dark">
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="index.html">
+          <img
+            class="logo-img"
+            src="assets/images/image-1.png"
+            alt="Nona Basketball League logo"/>
+          <span class="brand-sub">
+        </a>
+        <nav class="links" id="menu" aria-label="Primary navigation">
+          <a class="active" href="index.html">Home</a>
+          <!-- <a class="" href="about.html">About</a> -->
+          <a class="" href="divisions.html">Divisions</a>
+          <!-- <a class="" href="schedule.html">Schedule</a> -->
+          <!-- <a class="active" href="gallery.html">Gallery</a> -->
+          <a class="" href="faq.html">FAQ</a>
+          <a class="" href="contact.html">Contact</a>
+          <a
+            class="btn btn-primary nav-cta"
+            data-href="registrationUrl"
+            href="register.html"
+            >Register Now</a>
+        </nav>
+        <div class="nav-right">
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Toggle theme"
+          >
+            <span id="themeIcon">☀</span
+            ><span id="themeLabel">Light</span></button
+          ><button
+            class="burger"
+            id="burger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="menu"
+            aria-label="Open menu"
+          >
+            ☰
+          </button>
+        </div>
       </div>
     </header>
-
     <main>
-      <section>
-        <div class="eyebrow">We’re upgrading the experience</div>
-
-        <h1>
-          Something <span class="accent">Better</span><br />
-          Is Being <span class="accent-green">Built.</span>
-        </h1>
-
-        <p class="lead">
-          The Premier Sports Lab website is getting an upgrade.
-          <strong>Our programs are still active and registration is still open.</strong>
-          Use the links below to register, manage your account, or follow PSL for the latest updates.
-        </p>
-
-        <div class="actions">
-          <a
-            class="btn btn-primary"
-            href="https://app.gostudiopro.com/online/premiersportslab"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View Programs &amp; Register →
-          </a>
-
-          <a
-            class="btn btn-secondary"
-            href="https://www.instagram.com/premiersportslab/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Follow us on Instagram
-          </a>
+      <section class="hero" id="top" style="padding: 0">
+        <div class="wrap hero-inner">
+          <div>
+            <h1>
+              <span class="o">Build</span> Skills
+              <br/>
+              <span class="o">Develop</span> Character
+              <br/>
+              <span class="o">Compete</span> with <img src="assets/images/basketball_heart.png" alt="Heart" class="heart-icon"/>
+            </h1>
+            <br>
+            <p class="lead">
+              Structured, high-quality practices and games in a community-first
+              environment — where Lake Nona's young players learn the
+              fundamentals of the game and the values that last a lifetime.
+            </p>
+            <div class="hero-stats">
+              <div class="s"><b>5</b><span>Age Divisions</span></div>
+              <div class="s"><b>3–14</b><span>Years Old</span></div>
+              <div class="s"><b>SoFive</b><span>Lake Nona</span></div>
+            </div>
+          </br>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="register.html">Register Your Player</a>
+              <a class="btn btn-green" href="divisions.html">New To PSL?</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="court"></div>
+            <img
+              alt="Premier Sports Lab"
+              class="hero-logo"
+              id="heroLogo"
+              src="assets/images/image-1.png"
+            />
+          </div>
         </div>
       </section>
-
-      <aside class="panel">
-        <div class="panel-label">PSL programs continue while we build</div>
-
-        <div class="programs">
-          <div class="program">
-            <span class="program-name">Mini Hoops: 3-5 yrs</span>
-            <span class="program-tag">Play</span>
-          </div>
-          <div class="program">
-            <span class="program-name">Nona Basketball League: 6-14 yrs</span>
-            <span class="program-tag">Start</span>
-          </div>
-          <div class="program">
-            <span class="program-name">The Lab: 7-14 yrs</span>
-            <span class="program-tag">Train</span>
+      <div aria-hidden="true" class="strip">
+        <div class="track">
+          <span>Fundamentals</span>
+          <span>Teamwork</span>
+          <span>Confidence</span>
+          <span>Character</span>
+          <span>Community</span>
+          <span>Game IQ</span>
+          <span>Fundamentals</span>
+          <span>Teamwork</span>
+          <span>Confidence</span>
+          <span>Character</span>
+          <span>Community</span>
+          <span>Game IQ</span>
+          <span>Fundamentals</span>
+          <span>Teamwork</span>
+          <span>Confidence</span>
+          <span>Character</span>
+          <span>Community</span>
+          <span>Game IQ</span>
+        </div>
+      </div>
+      <section id="about">
+        <div class="wrap about-grid">
+          <div class="about-copy">
+            <p class="eyebrow">Our Story</p>
+            <h2>Coached with Purpose. Built for the Community.</h2>
+            <p>
+              Premier Sports Lab was built by a team of passionate coaches and mentors with a shared vision:
+              to create a basketball environment where athletes can learn, grow, and compete with confidence.
+              We believe every practice, training session, and game is an opportunity for development —
+              building strong fundamentals, basketball IQ, muscle memory, confidence, and a genuine love for the game.
+            </p>
+            <br>
+            <p>
+              From an athlete’s first experience with basketball to their next level of competition, our team
+              is committed to providing structured, positive, and challenging experiences that meet players
+              where they are and help them continue to grow.
+            </p>
+            <br>
+            <p>
+              At Premier Sports Lab, we don’t just teach basketball. We
+              <strong style="color: white;">BUILD</strong>. We <strong style="color: white;">DEVELOP</strong>. We <strong style="color: white;">COMPETE</strong>
+            </p>
+            
+            <div class="values">
+              <div class="value o">
+                <b>Fundamentals</b>
+                <span>Skills that build a strong foundation on the court.</span>
+              </div>
+              <div class="value g">
+                <b>Character</b>
+                <span>Respect, discipline, and teamwork in every session.</span>
+              </div>
+              <div class="value d">
+                <b>Consistency</b>
+                <span>Structured, high-quality practices week after week.</span>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="contact-strip">
-          <div class="contact-card">
-            <span>Location</span>
-            <p>SOFIVE / XL Soccer World</p>
-            <p>Lake Nona • Orlando, FL</p>
+      </section>
+      <section class="soft" id="divisions">
+        <div class="wrap">
+          <div class="section-head center">
+            <p class="eyebrow">Find Your Level</p>
+            <h2>Age Divisions</h2>
+            <p>
+              Five divisions built around where your player is today — from
+              first dribbles to competitive game play.
+            </p>
           </div>
-
-          <div class="contact-card">
-            <span>Questions?</span>
-            <a href="mailto:hello@premierslhq.com">hello@premierslhq.com</a>
+          <div class="div-grid">
+            <div class="div-card">
+              <div class="num">01</div>
+              <span class="age">Ages 3–5</span>
+              <h3>Mini Hoops</h3>
+              <p>
+                An introduction to movement, coordination, and the joy of the
+                game through playful, age-appropriate drills.
+              </p>
+            </div>
+            <div class="div-card">
+              <div class="num">02</div>
+              <span class="age">Ages 5–7</span>
+              <h3>D-League</h3>
+              <p>
+                Core fundamentals — dribbling, passing, and shooting — taught
+                with patience and encouragement.
+              </p>
+            </div>
+            <div class="div-card">
+              <div class="num">03</div>
+              <span class="age">Ages 5–7</span>
+              <h3>Rookies</h3>
+              <p>
+                Core fundamentals — dribbling, passing, and shooting — taught
+                with patience and encouragement.
+              </p>
+            </div>
+            <div class="div-card">
+              <div class="num">04</div>
+              <span class="age">Ages 8–10</span>
+              <h3>Sophomores</h3>
+              <p>
+                Building game understanding, teamwork, and confidence through
+                structured practices and scrimmages.
+              </p>
+            </div>
+            <div class="div-card">
+              <div class="num">05</div>
+              <span class="age">Ages 11–14</span>
+              <h3>All Stars</h3>
+              <p>
+                Advanced techniques, competitive play, and specialized attention
+                for players ready to elevate their game.
+              </p>
+            </div>
           </div>
         </div>
-      </aside>
+      </section>
+      <section id="schedule">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Weekly Rhythm</p>
+            <h2>Practice &amp; Game Schedule At A Glance</h2>
+            <p>
+              A consistent weekly structure so families can plan ahead.
+            </p>
+            <p>Each season runs 7 weeks long</p>
+          </div>
+          <div>
+            <h2>Practice</h2>
+            <div class="sched-wrap">
+              <table class="sched">
+                <thead>
+                  <tr>
+                    <th>Division</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="day">Mini Hoops</td>
+                    <td>Saturday</td>
+                    <td>9:00 AM – 10:00 AM</td>
+                    <td><span class="pill">Clinic</span></td>
+                  </tr>
+                  <tr>
+                    <td class="day">D-League</td>
+                    <td>Friday</td>
+                    <td>5:00 PM – 6:00 PM</td>
+                    <td><span class="pill">Practice</span></td>
+                  </tr>
+                  <tr>
+                    <td class="day">Rookies</td>
+                    <td>Friday</td>
+                    <td>5:00 PM – 5:50 PM</td>
+                    <td><span class="pill">Practice</span></td>
+                  </tr>
+                  <tr>
+                    <td class="day">Sophomores</td>
+                    <td>Friday</td>
+                    <td>6:00 PM – 6:50 PM</td>
+                    <td><span class="pill">Practice</span></td>
+                  </tr>
+                  <tr>
+                    <td class="day">All Stars</td>
+                    <td>Friday</td>
+                    <td>7:00 PM – 8:00 PM</td>
+                    <td><span class="pill">Practice</span></td>
+                  </tr>
+                  <tr>
+                    <td class="day">Lab Sessions</td>
+                    <td>Sunday</td>
+                    <td>9:00 AM – 11:00 AM</td>
+                    <td><span class="pill">Clinic</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <br>
+          <div>
+            <h2>Games</h2>
+            <div class="sched-wrap">
+              <table class="sched">
+                <thead>
+                  <tr>
+                    <th>Division</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="day">D-League</td>
+                    <td>Saturday</td>
+                    <td>11:00 AM – 12:00 AM</td>
+                    <td><span class="pill">Games</span></td>
+                  </tr>
+                  <tr>
+                    <td class="day">Rookies</td>
+                    <td>Saturday</td>
+                    <td>12:00 AM – 1:00 PM</td>
+                    <td><span class="pill">Games</span></td>
+                  </tr>
+                  <tr>
+                    <td class="day">Sophomores</td>
+                    <td>Saturday</td>
+                    <td>1:00 PM – 3:00 PM</td>
+                    <td><span class="pill">Games</span></td>
+                  </tr>
+                  <tr>
+                    <td class="day">All Stars</td>
+                    <td>Saturday</td>
+                    <td>3:00 PM – 4:00 PM</td>
+                    <td><span class="pill">Games</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style="padding-top: 0">
+        <div class="wrap">
+          <div class="cta-band">
+            <p class="eyebrow">Spots Fill Fast</p>
+            <h2>Ready to Get Your Player on the Court?</h2>
+            <p>
+              Join a community of families building skills, confidence, and
+              character — right here in Lake Nona.
+            </p>
+            <a
+              class="btn"
+              href="register.html"
+              style="background: #fff; color: var(--orange-dark)"
+              >Register Today</a
+            >
+          </div>
+        </div>
+      </section>
     </main>
-
     <footer>
-      <span>© 2026 Premier Sports Lab, LLC. All rights reserved.</span>
-      <a href="mailto:hello@premierslhq.com">Contact PSL</a>
+      <div class="wrap">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <img
+              src="assets/images/image-1.png"
+              alt="premier Sports Lab"
+              style="height: 52px; width: auto"
+            />
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <a href="divisions.html">Age Divisions</a>
+            <!-- <a href="schedule.html">Schedule</a> -->
+            <a href="register.html">Registration</a>
+            <a href="faq.html">FAQ</a>
+          </div>
+          <div>
+            <h4>Connect</h4>
+            <a data-href="email" href="contact.html">
+              <span data-config="email">League Email</span>
+            </a>
+            <a data-href="https://www.instagram.com/premiersportslab/" href="#">Instagram</a>
+            <a data-href="https://www.facebook.com/profile.php?id=61591944906627" href="#">Facebook</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>© <span data-year></span> Premier Sports Lab. All rights reserved.</span><span>Operated by <span data-config="legalName">Premier Sports Lab, LLC</span>.</span>
+        </div>
+      </div>
     </footer>
-  </div>
-</body>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
 </html>
