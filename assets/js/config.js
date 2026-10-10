@@ -7,14 +7,14 @@ window.NBL_CONFIG = {
   email: "hello@premierslhq.com",
   phoneDisplay: "(205)-292-6652",
   phoneHref: "",
-  registrationUrl: "https://app.gostudiopro.com/online/premiersportslab",
+  registrationUrl: "https://premiersportslab.leagueapps.com/leagues/basketball/5173650-free-trial-registration",
   instagramUrl: "https://www.instagram.com/premiersportslab/",
   facebookUrl: "https://www.facebook.com/people/Premier-Sports-Lab/61591944906627/",
 prices: {
   recreationLeague: "$280",
-  miniHoops: "$145",
-  trainingDropIn: "$65",
-  trainingMonthly: "$210"
+  miniHoops: "$140",
+  trainingDropIn: "$60",
+  trainingMonthly: "$200"
 },
   season: {
     status: "Now Enrolling",
